@@ -2,16 +2,15 @@
 setwd("~/Desktop/Rstudio/RepData_PeerAssessment1")
 Data <- read.csv("activity.csv")
 
-#Convert strings to date
-Data$date <- as.Date(Data$date)
-
-
 # Get Mean and Median by day using dplyr
 library(dplyr)
-MM_Data <- Data %>%
-  summarise(group_by(date), mean(steps), median(steps), na.rm=TRUE)
+MM_Data <- Data %>% 
+  # na.omit(steps) %>%
+  group_by(date) %>% 
+  summarise(Sum=sum(steps,na.rm=TRUE),Mean=mean(steps,na.rm=TRUE), Median=median(steps,na.rm=TRUE))
 
-
+TMedian <- aggregate(Data$steps, by=list(Data$date), FUN=median, na.rm=TRUE)
 #plot mean and median total steps per day
+library(ggplot2)
 png("Mean&Median.png")
-hist(Data$date, )
+g <- ggplot()
