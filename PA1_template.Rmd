@@ -9,7 +9,7 @@ Process/transform the data (if necessary) into a format suitable for your analys
 Calculate the total number of steps taken per day.
 Make a histogram of the total number of steps taken each day
 
-```{r}
+```{r echo=TRUE, eval=TRUE}
 setwd("~/Desktop/Rstudio/RepData_PeerAssessment1")
 Data <- read.csv("activity.csv")
 totalSteps <-aggregate(steps~date,data=Data,sum,na.rm=TRUE)
