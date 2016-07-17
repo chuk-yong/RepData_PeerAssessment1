@@ -3,6 +3,9 @@
 title: "RepData_PeerAssessment1"
 author: Chuk Yong
 date: July 17, 2016
+output:
+  html_document:
+    keep_md: true
 ---
 ## Loading and preprocessing the data
 Show any code that is needed to load the data.
