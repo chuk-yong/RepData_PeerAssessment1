@@ -9,7 +9,7 @@ Calculate the total number of steps taken per day. Make a histogram of the total
 setwd("~/Desktop/Rstudio/RepData_PeerAssessment1")
 Data <- read.csv("activity.csv")
 totalSteps <-aggregate(steps~date,data=Data,sum,na.rm=TRUE)
-hist(totalSteps$steps)
+barplot(totalSteps$steps, names.arg = totalSteps$date, main= "Total steps per day",xlab = "Date", ylab = "Steps")
 ```
 
 ![](PA1_template_files/figure-markdown_github/unnamed-chunk-1-1.png)

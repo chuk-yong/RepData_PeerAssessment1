@@ -18,7 +18,7 @@ Make a histogram of the total number of steps taken each day
 setwd("~/Desktop/Rstudio/RepData_PeerAssessment1")
 Data <- read.csv("activity.csv")
 totalSteps <-aggregate(steps~date,data=Data,sum,na.rm=TRUE)
-hist(totalSteps$steps)
+barplot(totalSteps$steps, names.arg = totalSteps$date, main= "Total steps per day",xlab = "Date", ylab = "Steps")
 ```
 
 Calculate and report the mean and median of the total number of steps taken per day
