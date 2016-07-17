@@ -1,0 +1,56 @@
+Reproducible Research: Peer Assessment 1
+By Chuk Yong
+
+
+## Loading and preprocessing the data
+Show any code that is needed to load the data.
+Process/transform the data (if necessary) into a format suitable for your analysis
+
+Calculate the total number of steps taken per day.
+Make a histogram of the total number of steps taken each day
+
+```{r}
+setwd("~/Desktop/Rstudio/RepData_PeerAssessment1")
+Data <- read.csv("activity.csv")
+totalSteps <-aggregate(steps~date,data=Data,sum,na.rm=TRUE)
+hist(totalSteps$steps)
+```
+
+Calculate and report the mean and median of the total number of steps taken per day
+
+```{r}
+mean(totalSteps$steps)
+median(totalSteps$steps)
+```
+
+##What is the average daily activity pattern?
+
+Make a time series plot (i.e. ???????????????? = "????") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+
+```{r}
+intervalSteps <- aggregate(steps~interval, Data, sum, na.rm=TRUE)
+plot(steps~interval,data=intervalSteps,type="l")
+```
+
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+```{r}
+intervalSteps[which.max(intervalSteps$steps),]$interval
+```
+
+Imputing missing values
+
+Note that there are a number of days/intervals where there are missing values (coded as ????????). The presence of missing days may introduce bias into some calculations or summaries of the data.
+
+Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with ????????s)
+```{r}
+sum(is.na(Data$steps))
+```
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
