@@ -1,25 +1,54 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+Reproducible Research: Peer Assessment 1
+By Chuk Yong
 
 
 ## Loading and preprocessing the data
+Show any code that is needed to load the data.
+Process/transform the data (if necessary) into a format suitable for your analysis
 
+Calculate the total number of steps taken per day.
+Make a histogram of the total number of steps taken each day
 
+```{r}
+setwd("~/Desktop/Rstudio/RepData_PeerAssessment1")
+Data <- read.csv("activity.csv")
+totalSteps <-aggregate(steps~date,data=Data,sum,na.rm=TRUE)
+hist(totalSteps$steps)
+```
 
-## What is mean total number of steps taken per day?
+Calculate and report the mean and median of the total number of steps taken per day
 
+```{r}
+mean(totalSteps$steps)
+median(totalSteps$steps)
+```
 
+##What is the average daily activity pattern?
 
-## What is the average daily activity pattern?
+Make a time series plot (i.e. ???????????????? = "????") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
+```{r}
+intervalSteps <- aggregate(steps~interval, Data, sum, na.rm=TRUE)
+plot(steps~interval,data=intervalSteps,type="l")
+```
 
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+```{r}
+intervalSteps[which.max(intervalSteps$steps),]$interval
+```
 
-## Imputing missing values
+Imputing missing values
 
+Note that there are a number of days/intervals where there are missing values (coded as ????????). The presence of missing days may introduce bias into some calculations or summaries of the data.
 
+Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with ????????s)
+```{r}
+sum(is.na(Data$steps))
+```
 
-## Are there differences in activity patterns between weekdays and weekends?
+Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+
+Ans: I will use the mean for 5-min interval which should be a more accurate prediction of the missing values
+
+Create a new dataset that is equal to the original dataset but with the missing data filled in.
+
